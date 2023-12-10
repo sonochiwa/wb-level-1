@@ -1,11 +1,9 @@
 package exercise_3
 
-import (
-	"fmt"
-)
+import "fmt"
 
-// Написать программу, которая конкурентно рассчитает значение квадратов чисел
-// взятых из массива (2,4,6,8,10) и выведет их квадраты в stdout.
+// Дана последовательность чисел: 2,4,6,8,10. Найти сумму их
+// квадратов(2^2 + 3^2 + 4^2 ...) с использованием конкурентных вычислений.
 
 func square(value int, ch chan int) {
 	square := value * value
@@ -17,11 +15,13 @@ func square(value int, ch chan int) {
 func Run() {
 	numbers := []int{2, 4, 6, 8, 10}
 	ch := make(chan int)
+	sum := 0
 
 	for _, num := range numbers {
 		go square(num, ch)
-		fmt.Println(<-ch)
+		sum += <-ch
 	}
 
 	close(ch)
+	fmt.Println(sum)
 }
