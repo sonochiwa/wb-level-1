@@ -12,7 +12,7 @@ import (
 // Принимаем wg по указателю, чтобы можно было менять значение счетчика, объявленного в другой области видимости.
 func square(value int, wg *sync.WaitGroup, ch chan int) {
 	// Декрементим счетчик wg.
-	wg.Done()
+	defer wg.Done()
 
 	// Считаем квадрат переданного в функцию числа.
 	square := value * value
