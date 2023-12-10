@@ -29,7 +29,7 @@ func Run() {
 	numbers := [5]int{2, 4, 6, 8, 10}
 
 	// Инициализируем канал для значений типа int c размером буфера равным длине массива numbers.
-	ch := make(chan int, len(numbers))
+	ch := make(chan int)
 
 	// Пробегаемся по элементам массива numbers.
 	for _, num := range numbers {
@@ -38,6 +38,11 @@ func Run() {
 
 		// Считаем квадрат числа
 		go square(num, &wg, ch)
+
+		select {
+		case v := <-ch:
+			fmt.Println(v)
+		}
 	}
 
 	// Блокируем основную горутину, пока счетчик wg снова не станет равным нулю.
@@ -46,9 +51,4 @@ func Run() {
 
 	// Закрываем канал.
 	close(ch)
-
-	// Выводим содержимое канала.
-	for result := range ch {
-		fmt.Println(result)
-	}
 }
