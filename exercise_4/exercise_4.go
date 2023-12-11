@@ -48,6 +48,7 @@ func addWorker(i int, ch chan int, signInterrupt <-chan os.Signal) {
 			fmt.Printf("[Worker %d] Sleep %d milliseconds\n", i, <-ch)
 		case <-signInterrupt:
 			fmt.Printf("Worker %d finished.\n", i)
+
 			// Завершаем функцию тем самым выключая горутину
 			return
 		}
