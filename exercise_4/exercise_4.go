@@ -40,7 +40,6 @@ func getWorkersCount() int {
 func addWorker(i int, ch chan int, signInterrupt <-chan os.Signal) {
 	for {
 		select {
-		default:
 		case <-ch:
 			// Отправляем воркер в ожидание
 			time.Sleep(time.Duration(<-ch) * time.Millisecond)
