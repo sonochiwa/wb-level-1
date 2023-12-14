@@ -25,7 +25,6 @@ func (adapter *GeoLibraryAdapter) GetLocation() string {
 	return fmt.Sprintf("Latitude: %f, Longitude: %f", adapter.GeoLibrary.Latitude, adapter.GeoLibrary.Longitude)
 }
 
-// основной метод для демонстрации
 func Run() {
 	// Создаем объект сторонней библиотеки
 	geoLibrary := &GeoLibrary{
