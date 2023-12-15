@@ -4,20 +4,20 @@ import "fmt"
 
 // Реализовать пересечение двух неупорядоченных множеств.
 
-func intersection(set1, set2 []int) []int {
+func intersection(set1, set2 map[int]struct{}) []int {
 	var result []int
-	var inUse map[int]bool
+	inUse := make(map[int]bool)
 
 	// Заполняем карту элементами из первого множества
-	for _, val := range set1 {
-		inUse[val] = true
+	for k, _ := range set1 {
+		inUse[k] = true
 	}
 
 	// Проверяем каждый элемент второго множества
 	// и добавляем его в результат, если он есть в первом множестве
-	for _, val := range set2 {
-		if inUse[val] {
-			result = append(result, val)
+	for k, _ := range set2 {
+		if inUse[k] {
+			result = append(result, k)
 		}
 	}
 
@@ -25,9 +25,9 @@ func intersection(set1, set2 []int) []int {
 }
 
 func Run() {
-	// Множества
-	set1 := []int{2, 1, 3, 5, 4}
-	set2 := []int{7, 4, 5, 6, 3}
+	// Инициализируем множества с дефолтными значениями
+	set1 := map[int]struct{}{1: {}, 2: {}, 3: {}}
+	set2 := map[int]struct{}{2: {}, 3: {}, 4: {}}
 
 	result := intersection(set1, set2)
 
