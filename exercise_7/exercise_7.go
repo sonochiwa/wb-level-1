@@ -8,25 +8,27 @@ import (
 // Реализовать конкурентную запись данных в map.
 
 func writeToMap(likes map[string]int, wg *sync.WaitGroup, mu *sync.Mutex) {
+	// Следуя хорошим практикам вызываем wg.Done() используя отложеный вызов
 	defer wg.Done()
 
-	mu.Lock()
+	mu.Lock() // Блокируем
 	likes["counter"] += 1
-	mu.Unlock()
+	mu.Unlock() // Разблокируем
 }
 
 func Run() {
 	var wg sync.WaitGroup
 	var mu sync.Mutex
 
-	likes := map[string]int{}
+	likes := map[string]int{} // Карта, в которой будем считать лайки
 
+	// Запускаем 100 горутин изменяющих нашу мапу
 	for i := 0; i < 100; i++ {
-		wg.Add(1)
+		wg.Add(1) // Добавляем 1
 		go writeToMap(likes, &wg, &mu)
 	}
 
-	wg.Wait()
+	wg.Wait() // Ждем обнуления счетчика
 
-	fmt.Println(likes["counter"])
+	fmt.Println(likes["counter"]) // 100 - вывод соответствует ожиданиям
 }
