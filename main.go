@@ -1,9 +1,5 @@
 package main
 
-import (
-	"wb-level-1/exercise_15"
-)
-
 func main() {
 	//exercise_1.Run()
 	//exercise_2.Run()
@@ -19,7 +15,7 @@ func main() {
 	//exercise_12.Run()
 	//exercise_13.Run()
 	//exercise_14.Run()
-	exercise_15.Run()
+	//exercise_15.Run()
 	//exercise_16.Run()
 	//exercise_17.Run()
 	//exercise_18.Run()
