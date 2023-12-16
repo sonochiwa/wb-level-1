@@ -7,7 +7,7 @@ import (
 
 // Реализовать конкурентную запись данных в map.
 
-func writeToMap(likes map[string]int, wg *sync.WaitGroup, mu *sync.Mutex) {
+func writeToMap(likes map[string]int, wg *sync.WaitGroup, mu *sync.RWMutex) {
 	// Следуя хорошим практикам вызываем wg.Done() используя отложеный вызов
 	defer wg.Done()
 
@@ -18,7 +18,7 @@ func writeToMap(likes map[string]int, wg *sync.WaitGroup, mu *sync.Mutex) {
 
 func Run() {
 	var wg sync.WaitGroup
-	var mu sync.Mutex
+	var mu sync.RWMutex
 
 	likes := map[string]int{} // Карта, в которой будем считать лайки
 
