@@ -1,4 +1,4 @@
-package exercise_6
+package exercise_06
 
 import (
 	"context"
